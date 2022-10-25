@@ -45,7 +45,7 @@ public class MillMaster extends EcoBot
 		final long force = 800000000L;
 		if (model.getNumberOfPossibleMoves() == 0)
 			return;
-		chooseMove(masterForceTree(rootEvaluationDataBase, 0, force, false, Integer.MIN_VALUE, Integer.MAX_VALUE, false));
+		chooseMove(forceTree(rootEvaluationDataBase, 0, force, false, Integer.MIN_VALUE, Integer.MAX_VALUE, false));
 	}
 	private boolean checkForWinCutOffAlpha(final int value,final int depth)
 	{
@@ -57,7 +57,7 @@ public class MillMaster extends EcoBot
 		final int valueBefore = currentEvaluationAtDepth[depth - 2];
 		return value < valueBefore && valueBefore < currentEvaluationAtDepth[depth - 4];
 	}
-	private DataEvaluatedMove masterForceTree(final int[] lastMoveEvaluationData, int currentDepth, long forceLeft, boolean softDepth, int alpha, int beta, final boolean invertedPerspective)
+	private DataEvaluatedMove forceTree(final int[] lastMoveEvaluationData, int currentDepth, long forceLeft, boolean softDepth, int alpha, int beta, final boolean invertedPerspective)
 	{
 		final int numberOfPossibleMoves = model.getNumberOfPossibleMoves();
 		final int numberOfMovesToAnalyse;
@@ -71,21 +71,21 @@ public class MillMaster extends EcoBot
 		}
 		long nextForce = forceLeft / numberOfMovesToAnalyse;
 		boolean nextSoftDepth = model.getMoveNumber() > 17 && model.getNumberOfStonesByPlayerID(model.getCurrentPlayerId() ^ 1) == 3;
-		final boolean reachedHorizont;
+		final boolean reachedHorizon;
 		if (nextForce == 0)
 		{
-			reachedHorizont = true;
-			adjustRechedDepth(currentDepth + 1);
+			reachedHorizon = true;
+			adjustReachedDepth(currentDepth + 1);
 		}
 		else
 		{
-			reachedHorizont = false;
+			reachedHorizon = false;
 		}
 		final DataEvaluatedMove[] moves;
 		boolean newBest = false;
 		DataEvaluatedMove currentBestResult = null;
 		int bestFoundValue = invertedPerspective ? beta : alpha;
-		if (!reachedHorizont)
+		if (!reachedHorizon)
 		{
 			final boolean isRoot = currentDepth == 0;
 			if (isRoot)
@@ -112,7 +112,7 @@ public class MillMaster extends EcoBot
 				{
 					final DataEvaluatedMove result = moves[0];
 					result.setEvaluation(-winValue + currentDepth);
-					adjustRechedDepth(currentDepth + 1);
+					adjustReachedDepth(currentDepth + 1);
 					return result;
 				}
 				currentEvaluationAtDepth[currentDepth] = value;
@@ -124,7 +124,7 @@ public class MillMaster extends EcoBot
 				{
 					final DataEvaluatedMove result = moves[0];
 					result.setEvaluation(winValue - currentDepth);
-					adjustRechedDepth(currentDepth + 1);
+					adjustReachedDepth(currentDepth + 1);
 					return result;
 				}
 				currentEvaluationAtDepth[currentDepth] = value;
@@ -141,7 +141,7 @@ public class MillMaster extends EcoBot
 				if (model.gameIsDrawAi(3) || model.getNumberOfStonesByPlayerID(model.getCurrentPlayerId()) == 3 && model.getMoveNumber() > 17 && model.getDistanceToLastClosedMill() > 4)
 				{
 					currentEvaluation = drawValue;
-					adjustRechedDepth(currentDepth + 1);
+					adjustReachedDepth(currentDepth + 1);
 				}
 				else
 				{
@@ -156,7 +156,7 @@ public class MillMaster extends EcoBot
 					 * System.out.println("Fehler!");
 					 * model.executeMove(currentMove.getMove()); }
 					 */
-					currentEvaluation = masterForceTree(currentMove.getEvaluationData(), currentDepth + 1, nextForce, nextSoftDepth, alpha, beta, !invertedPerspective).getEvaluation();
+					currentEvaluation = forceTree(currentMove.getEvaluationData(), currentDepth + 1, nextForce, nextSoftDepth, alpha, beta, !invertedPerspective).getEvaluation();
 				}
 				model.undoMove();
 				if (invertedPerspective)
@@ -254,7 +254,7 @@ public class MillMaster extends EcoBot
 		return currentBestResult;
 	}
 
-	private void adjustRechedDepth(final int depth)
+	private void adjustReachedDepth(final int depth)
 	{
 		if (getReachedDepth() < depth)
 			setReachedDepth(depth);
