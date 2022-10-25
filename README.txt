@@ -1,1 +1,1 @@
-An installation of Java 8 is required to run the JavaFX applications.
+An installation of Java 8 is required to run the JavaFX application.
