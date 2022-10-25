@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/ai/EcoBot.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/ai/Engine.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/ai/MillMaster.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/ai/SimpleBot.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/ai/StupidBot.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/ai/evaluation/EvaluationData.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/ai/evaluation/EvaluationModel.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/ai/other/DataEvaluatedMove.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/ai/other/EvaluatedMove.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/ai/other/MoveObject.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/ai/sort/MillSort.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/game/Field.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/game/GameModel.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/game/MillModel.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/game/MillMove.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/game/MillRow.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/game/MillRowContainer.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/game/PlayerInfo.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/game/PlayerType.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/gui/MillPresenter.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/gui/MillView.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/gui/PlayerOptionsView.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/other/MoveAndKey.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/other/Point.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/other/TokenAndPosition.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/programm_starter/BugChecker.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/programm_starter/Main.java" charset="windows-1252" />
+  </component>
+</project>
