@@ -18,9 +18,9 @@ public class MillMaster extends EcoBot
 	}
 
 	@Override
-	protected void doSomethingBeforCalculation()
+	protected void doSomethingBeforeCalculation()
 	{
-		super.doSomethingBeforCalculation();
+		super.doSomethingBeforeCalculation();
 		softDepthSplitWide = 3;
 		if (isPlayToWin())
 		{
@@ -35,7 +35,7 @@ public class MillMaster extends EcoBot
 		for (int a = 0; a < numberOfPossibleMoves; a++)
 		{
 			final int randomeAdd = random.nextInt(5) - 2;
-			movesContainer[a].setRandomeAdd(randomeAdd);
+			movesContainer[a].setRandomAdd(randomeAdd);
 		}
 	}
 
@@ -93,7 +93,7 @@ public class MillMaster extends EcoBot
 				moves = ecoCalculation(4);
 				for (int i = 0; i < numberOfPossibleMoves; i++)
 				{
-					moves[i].addRandomeValueToEvaluation();
+					moves[i].addRandomValueToEvaluation();
 				}
 			}
 			else
@@ -202,7 +202,7 @@ public class MillMaster extends EcoBot
 				if (invertedPerspective)
 				{
 					currentEvaluation = -currentEvaluation;
-					currentEvaluation += currentAnalysedRootMove.getRandomeAdd();
+					currentEvaluation += currentAnalysedRootMove.getRandomAdd();
 					newBest = currentEvaluation < beta;
 					if (newBest)
 					{
@@ -219,7 +219,7 @@ public class MillMaster extends EcoBot
 				}
 				else
 				{
-					currentEvaluation += currentAnalysedRootMove.getRandomeAdd();
+					currentEvaluation += currentAnalysedRootMove.getRandomAdd();
 					newBest = currentEvaluation > alpha;
 					if (newBest)
 					{

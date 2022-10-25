@@ -11,7 +11,7 @@ public class MillModel
 {
 	public static final int NUMBER_OF_FIELDS = 24;
 
-	private final Random randome;
+	private final Random random;
 	private final Field[] board;
 	private final Field[][] playerFieldsAtEnding; //Verbessert die Performance des Zuggenerators (Verwendung in der letzten Spielphase)
 	private int currentPlayerId; //0 oder 1
@@ -37,7 +37,7 @@ public class MillModel
 
 	public MillModel()
 	{
-		randome = new Random(536424354637675L);
+		random = new Random(536424354637675L);
 		board = new Field[NUMBER_OF_FIELDS];
 		playerFieldsAtEnding = new Field[2][3];
 		currentPlayerId = 0;
@@ -168,7 +168,7 @@ public class MillModel
 		{
 			do
 			{
-				currentKey = randome.nextLong();
+				currentKey = random.nextLong();
 				if (!(currentKeyIsLegal = currentKey != 0L))
 					continue;
 				for (int b = 0; b < a; b++) //Schleife versucht die Annahme zu wiederlegen, dass currentKey kein bereits existierender Key in keys[] darstellt
@@ -185,7 +185,7 @@ public class MillModel
 		keyOfPlayerChange = keys[0];
 		for (int a = 0, keysIndex = 1; a < NUMBER_OF_FIELDS; a++, keysIndex += 2)
 		{
-			board[a].setPlayerHashkeyOfField(new long[] { keys[keysIndex], keys[keysIndex + 1] });
+			board[a].setPlayerHashKeyOfField(new long[] { keys[keysIndex], keys[keysIndex + 1] });
 		}
 	}
 
@@ -436,7 +436,7 @@ public class MillModel
 		if (move.isAttackMove())
 		{
 			final Field attackField = move.getAttacked();
-			attackField.addTokenWithouthKey(currentPlayerId);
+			attackField.addTokenWithoutKey(currentPlayerId);
 			//numberOfFreedomesByPlayerID[0] += attackField.getLastEmptyFieldDifferenceResultByPlayerId(0);
 			//numberOfFreedomesByPlayerID[1] += attackField.getLastEmptyFieldDifferenceResultByPlayerId(1);
 			numberOfStonesByPlayerID[currentPlayerId]++;
@@ -445,13 +445,13 @@ public class MillModel
 		gameIsOver = false;
 		currentPlayerId ^= 1; //Spielerwechsel!
 		final Field destinationField = move.getDestination();
-		destinationField.removeTokenWithouthKey();
+		destinationField.removeTokenWithoutKey();
 		//numberOfFreedomesByPlayerID[0] += destinationField.getLastEmptyFieldDifferenceResultByPlayerId(0);
 		//numberOfFreedomesByPlayerID[1] += destinationField.getLastEmptyFieldDifferenceResultByPlayerId(1);
 		if (moveNumber >= 18) //Erste spielphase vorbei?
 		{
 			final Field sourceField = move.getSource();
-			sourceField.addTokenWithouthKey(currentPlayerId);
+			sourceField.addTokenWithoutKey(currentPlayerId);
 			//numberOfFreedomesByPlayerID[0] += sourceField.getLastEmptyFieldDifferenceResultByPlayerId(0);
 			//numberOfFreedomesByPlayerID[1] += sourceField.getLastEmptyFieldDifferenceResultByPlayerId(1);
 			if (numberOfStonesByPlayerID[currentPlayerId] == 3)
@@ -500,18 +500,18 @@ public class MillModel
 			final Field source = move.getSource();
 			if (source == null || source.isEmpty() || source.getTokenOfPlayerId() != currentPlayerId)
 				return false;
-			shouldBeAttackMove = destination.bekomsMillByPlayerId(currentPlayerId, source.getIdOfField());
+			shouldBeAttackMove = destination.becomesMillByPlayerId(currentPlayerId, source.getIdOfField());
 		}
 		else
 		{
-			shouldBeAttackMove = destination.bekomsMillByPlayerId(currentPlayerId);
+			shouldBeAttackMove = destination.becomesMillByPlayerId(currentPlayerId);
 		}
 		if (move.isAttackMove())
 		{
 			if (!shouldBeAttackMove)
 				return false;
 			final Field attackField = move.getAttacked();
-			if (attackField.isEmpty() || attackField.getTokenOfPlayerId() == currentPlayerId || (attackField.isPartOfMillByPlayerId(currentPlayerId ^ 1) && playerHasTokenswhichAreNotPartOfMill(currentPlayerId ^ 1)))
+			if (attackField.isEmpty() || attackField.getTokenOfPlayerId() == currentPlayerId || (attackField.isPartOfMillByPlayerId(currentPlayerId ^ 1) && playerHasTokensWhichAreNotPartOfMill(currentPlayerId ^ 1)))
 				return false;
 		}
 		else
@@ -521,7 +521,7 @@ public class MillModel
 		return true;
 	}
 
-	private boolean playerHasTokenswhichAreNotPartOfMill(final int playerId)
+	private boolean playerHasTokensWhichAreNotPartOfMill(final int playerId)
 	{
 		final int numberOfMills = millRowInformation.getNumberOfMillsByPlayerId(playerId);
 		final int numberOfStones = getNumberOfStonesByPlayerID(playerId);
@@ -581,7 +581,7 @@ public class MillModel
 		{
 			if (current.isEmpty())
 			{
-				if (current.bekomsMillByPlayerId(currentPlayerId))
+				if (current.becomesMillByPlayerId(currentPlayerId))
 				{
 					generateAttackMoves(null, current);
 
@@ -612,7 +612,7 @@ public class MillModel
 	{
 		if (neighbour != null && neighbour.isEmpty())
 		{
-			if (neighbour.bekomsHorizontalMillByPlayerId(currentPlayerId)) //Nur vertikale Züge können horizontale Mühlen erzeugen 
+			if (neighbour.becomesHorizontalMillByPlayerId(currentPlayerId)) //Nur vertikale Züge können horizontale Mühlen erzeugen
 			{
 				generateAttackMoves(field, neighbour);
 			}
@@ -627,7 +627,7 @@ public class MillModel
 	{
 		if (neighbour != null && neighbour.isEmpty())
 		{
-			if (neighbour.bekomsVerticalMillByPlayerId(currentPlayerId)) //Nur horizontale Züge können vertikale Mühlen erzeugen (hätte auch in einer Fallunterscheidung oder in einer Instanz eines implementierten Funktionalen Interface zusammengefasst werden können, was jedoch performance kostet)
+			if (neighbour.becomesVerticalMillByPlayerId(currentPlayerId)) //Nur horizontale Züge können vertikale Mühlen erzeugen (hätte auch in einer Fallunterscheidung oder in einer Instanz eines implementierten Funktionalen Interface zusammengefasst werden können, was jedoch performance kostet)
 			{
 				generateAttackMoves(field, neighbour);
 			}
@@ -652,7 +652,7 @@ public class MillModel
 		{
 			if (possibleDestination.isEmpty())
 			{
-				if (!currentPlayerHasMill && possibleDestination.bekomsMillByPlayerId(currentPlayerId))
+				if (!currentPlayerHasMill && possibleDestination.becomesMillByPlayerId(currentPlayerId))
 				{
 					if (!attackExists)
 					{
@@ -677,13 +677,13 @@ public class MillModel
 			do
 			{
 				Field attackSource;
-				if (attackDestination.bekomsMillByPlayerId(currentPlayerId, currentField0.getIdOfField()))
+				if (attackDestination.becomesMillByPlayerId(currentPlayerId, currentField0.getIdOfField()))
 				{
 					attackSource = currentField0;
 					possibleMoves[numberOfPossibleMoves++] = new MillMove(currentField1, attackDestination);
 					possibleMoves[numberOfPossibleMoves++] = new MillMove(currentField2, attackDestination);
 				}
-				else if (attackDestination.bekomsMillByPlayerId(currentPlayerId, currentField1.getIdOfField()))
+				else if (attackDestination.becomesMillByPlayerId(currentPlayerId, currentField1.getIdOfField()))
 				{
 					attackSource = currentField1;
 					possibleMoves[numberOfPossibleMoves++] = new MillMove(currentField0, attackDestination);

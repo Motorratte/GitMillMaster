@@ -40,9 +40,9 @@ public class EcoBot extends Engine
 	}
 
 	@Override
-	protected void doSomethingBeforCalculation()
+	protected void doSomethingBeforeCalculation()
 	{
-		super.doSomethingBeforCalculation();
+		super.doSomethingBeforeCalculation();
 		evaluationDataBaseMoveNumber = eModel.synchronizeModelWithEvaluationDataBase(rootEvaluationDataBase, evaluationDataBaseMoveNumber);
 		rootEvaluation = -eModel.evaluatePositionStil1(rootEvaluationDataBase, getRepresentedPlayerId() ^ 1, getRepresentedPlayerId());
 		model.generatePossibleMoves();

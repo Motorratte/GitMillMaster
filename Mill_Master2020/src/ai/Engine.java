@@ -94,7 +94,7 @@ public abstract class Engine implements Runnable
 		rootKey = model.getKeyOfCurrentPosition();
 		startTime = System.currentTimeMillis();
 		calculationStarted = true;
-		doSomethingBeforCalculation();
+		doSomethingBeforeCalculation();
 		calculate(); //Die eigentliche Berechnung der jeweiligen ai
 		timeNeeded = System.currentTimeMillis() - startTime;
 		calculationStarted = false;
@@ -121,7 +121,7 @@ public abstract class Engine implements Runnable
 		System.out.println();
 	}
 
-	protected void doSomethingBeforCalculation()
+	protected void doSomethingBeforeCalculation()
 	{
 		//leere überschreibbare methode
 	}

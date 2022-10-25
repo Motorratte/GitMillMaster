@@ -253,22 +253,22 @@ public class EvaluationModel
 		if (hasSource)
 		{
 			sourceField.removeToken();
-			sourceHorizontalMillIsOpenNow = sourceField.bekomsHorizontalMillByPlayerId(playerId);
-			sourceVerticalMillIsOpenNow = sourceField.bekomsVerticalMillByPlayerId(playerId);
+			sourceHorizontalMillIsOpenNow = sourceField.becomesHorizontalMillByPlayerId(playerId);
+			sourceVerticalMillIsOpenNow = sourceField.becomesVerticalMillByPlayerId(playerId);
 			currentValueOwn += sourceField.getLastEmptyFieldDifferenceResultByPlayerId(playerId);
 			currentValueEnemie += sourceField.getLastEmptyFieldDifferenceResultByPlayerId(enemiePlayerId);
 		}
 
-		horizontalMillIsClosedNow = destinationField.bekomsHorizontalMillByPlayerId(playerId);
-		verticalMillIsClosedNow = destinationField.bekomsVerticalMillByPlayerId(playerId);
+		horizontalMillIsClosedNow = destinationField.becomesHorizontalMillByPlayerId(playerId);
+		verticalMillIsClosedNow = destinationField.becomesVerticalMillByPlayerId(playerId);
 		destinationField.addToken(playerId);
 		currentValueOwn += destinationField.getLastEmptyFieldDifferenceResultByPlayerId(playerId);
 		currentValueEnemie += destinationField.getLastEmptyFieldDifferenceResultByPlayerId(enemiePlayerId);
 		if (isAttackMove)
 		{
 			attackField.removeToken();
-			attackHorizontalMillIsOpenNow = attackField.bekomsHorizontalMillByPlayerId(enemiePlayerId);
-			attackVerticalMillIsOpenNow = attackField.bekomsVerticalMillByPlayerId(enemiePlayerId);
+			attackHorizontalMillIsOpenNow = attackField.becomesHorizontalMillByPlayerId(enemiePlayerId);
+			attackVerticalMillIsOpenNow = attackField.becomesVerticalMillByPlayerId(enemiePlayerId);
 			currentValueOwn += attackField.getLastEmptyFieldDifferenceResultByPlayerId(playerId);
 			currentValueEnemie += attackField.getLastEmptyFieldDifferenceResultByPlayerId(enemiePlayerId);
 			toFill[NUMBER_OF_CATCHED_TOKENS_INDEX | playerId]++;
@@ -312,7 +312,7 @@ public class EvaluationModel
 		Field currentNeighbourField = currentField.getTopNeighbour();
 		if (currentNeighbourField != null)
 		{
-			if (currentNeighbourField.bekomsHorizontalMillByPlayerId(playerId))
+			if (currentNeighbourField.becomesHorizontalMillByPlayerId(playerId))
 			{
 				if (currentNeighbourField.isEmpty())
 				{
@@ -330,7 +330,7 @@ public class EvaluationModel
 					toFill[NUMBER_OF_OPEN_BUT_BLOCKED_MILLS_INDEX | playerId]++;
 				}
 			}
-			else if (currentNeighbourField.isEmpty() && currentNeighbourField.bekomsHorizontalMillByPlayerId(enemiePlayerId))
+			else if (currentNeighbourField.isEmpty() && currentNeighbourField.becomesHorizontalMillByPlayerId(enemiePlayerId))
 			{
 				final Field neighbourOfNeighbour = currentNeighbourField.getTopNeighbour();
 				if (neighbourOfNeighbour != null && !neighbourOfNeighbour.isEmpty() && neighbourOfNeighbour.getTokenOfPlayerId() == enemiePlayerId)
@@ -352,7 +352,7 @@ public class EvaluationModel
 		currentNeighbourField = currentField.getBottomNeighbour();
 		if (currentNeighbourField != null)
 		{
-			if (currentNeighbourField.bekomsHorizontalMillByPlayerId(playerId))
+			if (currentNeighbourField.becomesHorizontalMillByPlayerId(playerId))
 			{
 				if (currentNeighbourField.isEmpty())
 				{
@@ -370,7 +370,7 @@ public class EvaluationModel
 					toFill[NUMBER_OF_OPEN_BUT_BLOCKED_MILLS_INDEX | playerId]++;
 				}
 			}
-			else if (currentNeighbourField.isEmpty() && currentNeighbourField.bekomsHorizontalMillByPlayerId(enemiePlayerId))
+			else if (currentNeighbourField.isEmpty() && currentNeighbourField.becomesHorizontalMillByPlayerId(enemiePlayerId))
 			{
 				final Field neighbourOfNeighbour = currentNeighbourField.getBottomNeighbour();
 				if (neighbourOfNeighbour != null && !neighbourOfNeighbour.isEmpty() && neighbourOfNeighbour.getTokenOfPlayerId() == enemiePlayerId)
@@ -392,7 +392,7 @@ public class EvaluationModel
 		currentNeighbourField = currentField.getRightNeighbour();
 		if (currentNeighbourField != null)
 		{
-			if (currentNeighbourField.bekomsVerticalMillByPlayerId(playerId))
+			if (currentNeighbourField.becomesVerticalMillByPlayerId(playerId))
 			{
 				if (currentNeighbourField.isEmpty())
 				{
@@ -410,7 +410,7 @@ public class EvaluationModel
 					toFill[NUMBER_OF_OPEN_BUT_BLOCKED_MILLS_INDEX | playerId]++;
 				}
 			}
-			else if (currentNeighbourField.isEmpty() && currentNeighbourField.bekomsVerticalMillByPlayerId(enemiePlayerId))
+			else if (currentNeighbourField.isEmpty() && currentNeighbourField.becomesVerticalMillByPlayerId(enemiePlayerId))
 			{
 				final Field neighbourOfNeighbour = currentNeighbourField.getRightNeighbour();
 				if (neighbourOfNeighbour != null && !neighbourOfNeighbour.isEmpty() && neighbourOfNeighbour.getTokenOfPlayerId() == enemiePlayerId)
@@ -432,7 +432,7 @@ public class EvaluationModel
 		currentNeighbourField = currentField.getLeftNeighbour();
 		if (currentNeighbourField != null)
 		{
-			if (currentNeighbourField.bekomsVerticalMillByPlayerId(playerId))
+			if (currentNeighbourField.becomesVerticalMillByPlayerId(playerId))
 			{
 				if (currentNeighbourField.isEmpty())
 				{
@@ -450,7 +450,7 @@ public class EvaluationModel
 					toFill[NUMBER_OF_OPEN_BUT_BLOCKED_MILLS_INDEX | playerId]++;
 				}
 			}
-			else if (currentNeighbourField.isEmpty() && currentNeighbourField.bekomsVerticalMillByPlayerId(enemiePlayerId))
+			else if (currentNeighbourField.isEmpty() && currentNeighbourField.becomesVerticalMillByPlayerId(enemiePlayerId))
 			{
 				final Field neighbourOfNeighbour = currentNeighbourField.getLeftNeighbour();
 				if (neighbourOfNeighbour != null && !neighbourOfNeighbour.isEmpty() && neighbourOfNeighbour.getTokenOfPlayerId() == enemiePlayerId)
@@ -476,7 +476,7 @@ public class EvaluationModel
 		Field currentNeighbourField = currentField.getTopNeighbour();
 		if (currentNeighbourField != null)
 		{
-			if (currentNeighbourField.bekomsHorizontalMillByPlayerId(playerId))
+			if (currentNeighbourField.becomesHorizontalMillByPlayerId(playerId))
 			{
 				if (currentNeighbourField.isEmpty())
 				{
@@ -494,7 +494,7 @@ public class EvaluationModel
 					toFill[NUMBER_OF_OPEN_BUT_BLOCKED_MILLS_INDEX | playerId]--;
 				}
 			}
-			else if (currentNeighbourField.isEmpty() && currentNeighbourField.bekomsHorizontalMillByPlayerId(enemiePlayerId))
+			else if (currentNeighbourField.isEmpty() && currentNeighbourField.becomesHorizontalMillByPlayerId(enemiePlayerId))
 			{
 				final Field neighbourOfNeighbour = currentNeighbourField.getTopNeighbour();
 				if (neighbourOfNeighbour != null && !neighbourOfNeighbour.isEmpty() && neighbourOfNeighbour.getTokenOfPlayerId() == enemiePlayerId)
@@ -516,7 +516,7 @@ public class EvaluationModel
 		currentNeighbourField = currentField.getBottomNeighbour();
 		if (currentNeighbourField != null)
 		{
-			if (currentNeighbourField.bekomsHorizontalMillByPlayerId(playerId))
+			if (currentNeighbourField.becomesHorizontalMillByPlayerId(playerId))
 			{
 				if (currentNeighbourField.isEmpty())
 				{
@@ -534,7 +534,7 @@ public class EvaluationModel
 					toFill[NUMBER_OF_OPEN_BUT_BLOCKED_MILLS_INDEX | playerId]--;
 				}
 			}
-			else if (currentNeighbourField.isEmpty() && currentNeighbourField.bekomsHorizontalMillByPlayerId(enemiePlayerId))
+			else if (currentNeighbourField.isEmpty() && currentNeighbourField.becomesHorizontalMillByPlayerId(enemiePlayerId))
 			{
 				final Field neighbourOfNeighbour = currentNeighbourField.getBottomNeighbour();
 				if (neighbourOfNeighbour != null && !neighbourOfNeighbour.isEmpty() && neighbourOfNeighbour.getTokenOfPlayerId() == enemiePlayerId)
@@ -556,7 +556,7 @@ public class EvaluationModel
 		currentNeighbourField = currentField.getRightNeighbour();
 		if (currentNeighbourField != null)
 		{
-			if (currentNeighbourField.bekomsVerticalMillByPlayerId(playerId))
+			if (currentNeighbourField.becomesVerticalMillByPlayerId(playerId))
 			{
 				if (currentNeighbourField.isEmpty())
 				{
@@ -574,7 +574,7 @@ public class EvaluationModel
 					toFill[NUMBER_OF_OPEN_BUT_BLOCKED_MILLS_INDEX | playerId]--;
 				}
 			}
-			else if (currentNeighbourField.isEmpty() && currentNeighbourField.bekomsVerticalMillByPlayerId(enemiePlayerId))
+			else if (currentNeighbourField.isEmpty() && currentNeighbourField.becomesVerticalMillByPlayerId(enemiePlayerId))
 			{
 				final Field neighbourOfNeighbour = currentNeighbourField.getRightNeighbour();
 				if (neighbourOfNeighbour != null && !neighbourOfNeighbour.isEmpty() && neighbourOfNeighbour.getTokenOfPlayerId() == enemiePlayerId)
@@ -596,7 +596,7 @@ public class EvaluationModel
 		currentNeighbourField = currentField.getLeftNeighbour();
 		if (currentNeighbourField != null)
 		{
-			if (currentNeighbourField.bekomsVerticalMillByPlayerId(playerId))
+			if (currentNeighbourField.becomesVerticalMillByPlayerId(playerId))
 			{
 				if (currentNeighbourField.isEmpty())
 				{
@@ -614,7 +614,7 @@ public class EvaluationModel
 					toFill[NUMBER_OF_OPEN_BUT_BLOCKED_MILLS_INDEX | playerId]--;
 				}
 			}
-			else if (currentNeighbourField.isEmpty() && currentNeighbourField.bekomsVerticalMillByPlayerId(enemiePlayerId))
+			else if (currentNeighbourField.isEmpty() && currentNeighbourField.becomesVerticalMillByPlayerId(enemiePlayerId))
 			{
 				final Field neighbourOfNeighbour = currentNeighbourField.getLeftNeighbour();
 				if (neighbourOfNeighbour != null && !neighbourOfNeighbour.isEmpty() && neighbourOfNeighbour.getTokenOfPlayerId() == enemiePlayerId)

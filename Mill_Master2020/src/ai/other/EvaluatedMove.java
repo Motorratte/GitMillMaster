@@ -17,10 +17,10 @@ public class EvaluatedMove implements MoveObject
 		this.move = move;
 	}
 
-	public EvaluatedMove(final MillMove move, final int evalution)
+	public EvaluatedMove(final MillMove move, final int evaluation)
 	{
 		this.move = move;
-		this.evaluation = evalution;
+		this.evaluation = evaluation;
 	}
 
 	public int getEvaluation()

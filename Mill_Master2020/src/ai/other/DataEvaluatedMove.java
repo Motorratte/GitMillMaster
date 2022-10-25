@@ -3,21 +3,21 @@ package ai.other;
 public class DataEvaluatedMove extends EvaluatedMove
 {
 	private final int[] evaluationData = new int[22];
-	private int randomeAdd;
+	private int randomAdd;
 	public int[] getEvaluationData()
 	{
 		return evaluationData;
 	}
-	public void setRandomeAdd(int randomeAdd)
+	public void setRandomAdd(int randomAdd)
 	{
-		this.randomeAdd = randomeAdd;
+		this.randomAdd = randomAdd;
 	}
-	public int getRandomeAdd()
+	public int getRandomAdd()
 	{
-		return randomeAdd;
+		return randomAdd;
 	}
-	public void addRandomeValueToEvaluation()
+	public void addRandomValueToEvaluation()
 	{
-		addValueToEvaluation(randomeAdd);
+		addValueToEvaluation(randomAdd);
 	}
 }

@@ -7,7 +7,7 @@ public class Field
 	private final MillRow horizontalRow;
 	private final MillRow verticalRow;
 	private final int idOfField;
-	private long[] playerHashkeyOfField;
+	private long[] playerHashKeyOfField;
 	private int numberOfEmptyNeighbours;
 	private int[] numberOfNeighboursWithPlayerId = new int[2];
 	private int[] emptyFieldDifferenceResultByPlayerId = new int[2];
@@ -33,17 +33,17 @@ public class Field
 
 	public long addToken(final int playerId)//gibt die differenz des Keys für die änderung der Stellung zurück
 	{
-		addTokenWithouthKey(playerId);
-		return playerHashkeyOfField[playerId];
+		addTokenWithoutKey(playerId);
+		return playerHashKeyOfField[playerId];
 	}
 
 	public long removeToken()
 	{
-		removeTokenWithouthKey();
-		return playerHashkeyOfField[tokenOfPlayerId];
+		removeTokenWithoutKey();
+		return playerHashKeyOfField[tokenOfPlayerId];
 	}
 
-	public void addTokenWithouthKey(final int playerId)
+	public void addTokenWithoutKey(final int playerId)
 	{
 		isEmpty = false;
 		this.tokenOfPlayerId = playerId;
@@ -62,7 +62,7 @@ public class Field
 		}
 	}
 
-	public void removeTokenWithouthKey()
+	public void removeTokenWithoutKey()
 	{
 		isEmpty = true;
 		horizontalRow.removeToken(tokenOfPlayerId);
@@ -92,7 +92,7 @@ public class Field
 		result.topNeighbour = topNeighbour;
 		result.leftNeighbour = leftNeighbour;
 		result.rightNeighbour = rightNeighbour;
-		result.playerHashkeyOfField = playerHashkeyOfField;
+		result.playerHashKeyOfField = playerHashKeyOfField;
 		result.isEmpty = isEmpty;
 		result.tokenOfPlayerId = tokenOfPlayerId;
 		return result;
@@ -174,14 +174,14 @@ public class Field
 
 	}
 
-	public void setPlayerHashkeyOfField(long[] playerHashkeyOfField)
+	public void setPlayerHashKeyOfField(long[] playerHashKeyOfField)
 	{
-		this.playerHashkeyOfField = playerHashkeyOfField;
+		this.playerHashKeyOfField = playerHashKeyOfField;
 	}
 
 	public long getKeyOfPlayerId(final int playerId)
 	{
-		return playerHashkeyOfField[playerId];
+		return playerHashKeyOfField[playerId];
 	}
 
 	public boolean isVeryImportantField()
@@ -224,22 +224,22 @@ public class Field
 		return (verticalRow.getNumberOfTokensByPlayerId(playerId) == 3 || horizontalRow.getNumberOfTokensByPlayerId(playerId) == 3);
 	}
 
-	public boolean bekomsMillByPlayerId(final int playerId) //Nutzung bei Steineinsetzphase
+	public boolean becomesMillByPlayerId(final int playerId) //Nutzung bei Steineinsetzphase
 	{
 		return (verticalRow.getNumberOfTokensByPlayerId(playerId) | horizontalRow.getNumberOfTokensByPlayerId(playerId)) >= 2;
 	}
 
-	public boolean bekomsVerticalMillByPlayerId(final int playerId) //Nutzung bei horizontalen Zügen in der mittleren Spielphase
+	public boolean becomesVerticalMillByPlayerId(final int playerId) //Nutzung bei horizontalen Zügen in der mittleren Spielphase
 	{
 		return verticalRow.getNumberOfTokensByPlayerId(playerId) >= 2;
 	}
 
-	public boolean bekomsHorizontalMillByPlayerId(final int playerId) //Nutzung bei vertikalen Zügen in der mittleren Spielphase
+	public boolean becomesHorizontalMillByPlayerId(final int playerId) //Nutzung bei vertikalen Zügen in der mittleren Spielphase
 	{
 		return horizontalRow.getNumberOfTokensByPlayerId(playerId) >= 2;
 	}
 
-	public boolean bekomsMillByPlayerId(final int playerId, final int idOfIllegalField) //Nutzung bei Endspielphase
+	public boolean becomesMillByPlayerId(final int playerId, final int idOfIllegalField) //Nutzung bei Endspielphase
 	{
 		return !verticalRow.fieldIsPartOfMillRow(idOfIllegalField) && verticalRow.getNumberOfTokensByPlayerId(playerId) >= 2
 				|| !horizontalRow.fieldIsPartOfMillRow(idOfIllegalField) && horizontalRow.getNumberOfTokensByPlayerId(playerId) >= 2;

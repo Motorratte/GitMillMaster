@@ -19,7 +19,7 @@ public class GameModel
     final ArrayList<MillMove> selectedMoves = new ArrayList<>();
     private final long timeLineDelayTime = 500;
     private long lastDelay = 0;
-    private final long aiMoveClickDelaytime = 1000;
+    private final long aiMoveClickDelayTime = 1000;
     private long lastAiMoveClickDelay = 0;
     private int aiAttackField = -1;
     private boolean globalAiOn = true;
@@ -440,7 +440,7 @@ public class GameModel
                 aiAttackField = move.getAttackedIndex();
             }
         }
-        else if (aiAttackField >= 0 && System.currentTimeMillis() - aiMoveClickDelaytime >= lastAiMoveClickDelay)
+        else if (aiAttackField >= 0 && System.currentTimeMillis() - aiMoveClickDelayTime >= lastAiMoveClickDelay)
         {
             fieldClicked(aiAttackField, false, true);
             return true;
